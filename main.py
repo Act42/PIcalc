@@ -18,22 +18,28 @@ def pi_bp(size, tsize):
 
     inside_circle = 0
 
-    def handler():
+    def handler(event):
         nonlocal inside_circle
+        thread_inside_circle = 0
+
         for _ in range(points_per_thread):
             x, y = random.random(), random.random()
             if x**2 + y**2 <= 1:
-                inside_circle += 1
+                thread_inside_circle += 1
+
+        inside_circle += thread_inside_circle
+        event.set()
+
+    events = []
 
     for _ in range(tsize):
-        thread = threading.Thread(target=handler)
-        threads.append(thread)
-
-    for thread in threads:
+        event = threading.Event()
+        events.append(event)
+        thread = threading.Thread(target=handler, args=(event,))
         thread.start()
 
-    for thread in threads:
-        thread.join()
+    for event in events:
+        event.wait()
 
     return (inside_circle / size) * 4
 
