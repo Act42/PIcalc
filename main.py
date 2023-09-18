@@ -55,5 +55,5 @@ print(f"Час виконання (один потік): {end_time - start_time}
 start_time = time.time()
 pi_bpr = pi_bp(size, tsize)
 end_time = time.time()
-print(f"Число Пі (багатопотоковість, {tsize} потоки): {pi_bpr}")
-print(f"Час виконання (багатопотоковість, {tsize} потоки): {end_time - start_time} секунд")
+print(f"Число Пі (багатопотоковість, потоки: {tsize}): {pi_bpr}")
+print(f"Час виконання (багатопотоковість, потоки: {tsize}): {end_time - start_time} секунд")
