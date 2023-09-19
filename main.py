@@ -1,6 +1,7 @@
 import random
-import threading
 import time
+import threading
+
 
 def pi_op(size):
     inside_circle = 0
